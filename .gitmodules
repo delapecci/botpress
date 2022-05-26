@@ -1,3 +1,6 @@
 [submodule "pro"]
 	path = packages/bp/src/pro
 	url = git@github.com:botpress/botpress-pro.git
+[submodule "modules/channel-rocketchat"]
+	path = modules/channel-rocketchat
+	url = git@github.com:delapecci/channel-rocketchat.git

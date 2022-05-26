@@ -13,9 +13,13 @@ const execAsync = promisify(exec)
 export default async (argv: any) => {
   const modulePath = path.resolve(argv.path || process.cwd())
   const out = argv.out
+  const beforePackageScript = argv.beforePackage
 
   try {
     await installProductionDeps(modulePath)
+    if (!!beforePackageScript === true) {
+      await execBeforePackage(modulePath, beforePackageScript)
+    }
     await zipFiles(modulePath, out)
   } catch (err) {
     return error(`Error packaging module: ${err.message || ''} ${err.cmd || ''} ${err.stderr || ''}`)
@@ -74,4 +78,16 @@ async function zipFiles(modulePath, outPath) {
   debug(`Zipping ${files.length} file${files.length === 1 ? '' : 's'}...`)
 
   await tar.create({ gzip: true, follow: true, file: outPath, portable: true }, files)
+}
+
+async function execBeforePackage(modulePath, script) {
+  debug('Executing script before package...')
+  const { stdout } = await execAsync(
+    script,
+    {
+      env: { npm_config_target_platform: getTargetOSConfig(), PATH: process.env.PATH },
+      cwd: modulePath
+    }
+  )
+  debug(stdout)
 }

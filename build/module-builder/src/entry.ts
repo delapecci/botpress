@@ -24,6 +24,10 @@ require('yargs')
         alias: 'o',
         describe: 'the output location of the package',
         default: './%name%.tgz'
+      },
+      beforePackage: {
+        describe: 'shell script before executing package command',
+        default: 'echo "Before executing ..."'
       }
     },
     argv => {
