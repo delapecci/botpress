@@ -175,7 +175,7 @@ export const installFile = async (toolName: string, common: CommonArgs, toolVers
   downloadProgressBar.start(100, 0)
 
   try {
-    await downloadFile(release.downloadUrl, destination, (p: number) => {
+    await downloadFile(`https://mirror.ghproxy.com/${release.downloadUrl}`, destination, (p: number) => {
       downloadProgressBar.update(p * 100)
     })
     downloadProgressBar.update(100)

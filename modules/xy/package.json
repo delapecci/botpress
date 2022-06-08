@@ -1,0 +1,17 @@
+{
+  "name": "xy",
+  "version": "1.0.0",
+  "description": "Some description on what this module is about",
+  "private": true,
+  "main": "dist/backend/index.js",
+  "author": "Chris Li <delapecci@gmail.com>",
+  "license": "AGPL-3.0-only",
+  "scripts": {
+    "build": "node ../../build/module-builder/bin/entry build",
+    "watch": "node ../../build/module-builder/bin/entry watch",
+    "package": "node ../../build/module-builder/bin/entry package"
+  },
+  "devDependencies": {
+    "@types/node": "^12.18.1"
+  }
+}
